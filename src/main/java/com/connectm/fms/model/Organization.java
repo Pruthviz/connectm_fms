@@ -18,6 +18,8 @@ public class Organization{
 	@XmlElement private int choiceListValueSubscriptionTypeId;
 	@XmlElement private String licenseNumber;
 	@XmlElement private int lastModifiedUser;
+	@XmlElement private boolean isActive;
+	@XmlElement private String emailId;
 	
 	/**
 	 * default constructor
@@ -141,6 +143,63 @@ public class Organization{
 		this.lastModifiedUser = lastModifiedUser;
 	}
 
+	/**
+	 * @return the isActive
+	 */
+	public boolean isActive() {
+		return isActive;
+	}
+
+	/**
+	 * @param isActive the isActive to set
+	 */
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	/**
+	 * @return the emailId
+	 */
+	public String getEmailId() {
+		return emailId;
+	}
+
+	/**
+	 * @param emailId the emailId to set
+	 */
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+
+	/**
+	 * @param organizationId
+	 * @param organizationName
+	 * @param choiceListValueTypeId
+	 * @param subscriptionDate
+	 * @param expairyDate
+	 * @param choiceListValueSubscriptionTypeId
+	 * @param licenseNumber
+	 * @param lastModifiedUser
+	 * @param isActive
+	 * @param emailId
+	 */
+	public Organization(int organizationId, String organizationName, int choiceListValueTypeId, String subscriptionDate,
+			String expairyDate, int choiceListValueSubscriptionTypeId, String licenseNumber, int lastModifiedUser,
+			boolean isActive, String emailId) {
+		super();
+		this.organizationId = organizationId;
+		this.organizationName = organizationName;
+		this.choiceListValueTypeId = choiceListValueTypeId;
+		this.subscriptionDate = subscriptionDate;
+		this.expairyDate = expairyDate;
+		this.choiceListValueSubscriptionTypeId = choiceListValueSubscriptionTypeId;
+		this.licenseNumber = licenseNumber;
+		this.lastModifiedUser = lastModifiedUser;
+		this.isActive = isActive;
+		this.emailId = emailId;
+	}
+
 
 
 	/* (non-Javadoc)
@@ -152,7 +211,7 @@ public class Organization{
 				+ ", choiceListValueTypeId=" + choiceListValueTypeId + ", subscriptionDate=" + subscriptionDate
 				+ ", expairyDate=" + expairyDate + ", choiceListValueSubscriptionTypeId="
 				+ choiceListValueSubscriptionTypeId + ", licenseNumber=" + licenseNumber + ", lastModifiedUser="
-				+ lastModifiedUser + "]";
+				+ lastModifiedUser + ", isActive=" + isActive + ", emailId=" + emailId + "]";
 	}
 
 
@@ -166,7 +225,9 @@ public class Organization{
 		int result = 1;
 		result = prime * result + choiceListValueSubscriptionTypeId;
 		result = prime * result + choiceListValueTypeId;
+		result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
 		result = prime * result + ((expairyDate == null) ? 0 : expairyDate.hashCode());
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + lastModifiedUser;
 		result = prime * result + ((licenseNumber == null) ? 0 : licenseNumber.hashCode());
 		result = prime * result + organizationId;
@@ -193,10 +254,17 @@ public class Organization{
 			return false;
 		if (choiceListValueTypeId != other.choiceListValueTypeId)
 			return false;
+		if (emailId == null) {
+			if (other.emailId != null)
+				return false;
+		} else if (!emailId.equals(other.emailId))
+			return false;
 		if (expairyDate == null) {
 			if (other.expairyDate != null)
 				return false;
 		} else if (!expairyDate.equals(other.expairyDate))
+			return false;
+		if (isActive != other.isActive)
 			return false;
 		if (lastModifiedUser != other.lastModifiedUser)
 			return false;
@@ -219,10 +287,5 @@ public class Organization{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 	
 }

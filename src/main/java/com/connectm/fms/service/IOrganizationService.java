@@ -26,17 +26,31 @@ public interface IOrganizationService {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/updateOrganization")
 	public Response updateOrganization(final Organization modifiedOrg);
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/deleteOrganization")
 	public Response deleteOrganization(final Organization modifmodifiedOrg);
 	
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/viewOrganization/{id}")
-	public Response viewOrganization(@PathParam("id") int id);
+	@Path("/viewOrganization")
+	public Response viewOrganization(final Organization modifiedOrg);
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/activateOrganization")
+	public Response activateOrganization(final Organization modifiedOrg);
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/deactivateOrganization")
+	public Response deactivateOrganization(final Organization modifiedOrg);
 
 }

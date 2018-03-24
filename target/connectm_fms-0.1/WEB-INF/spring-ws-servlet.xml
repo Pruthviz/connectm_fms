@@ -24,6 +24,7 @@
 		<jaxrs:serviceBeans>
 			<ref bean="userServiceImpl" />
 			<ref bean="organizationServiceImpl" />
+			<ref bean="authUserServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
@@ -46,6 +47,7 @@
      
     <bean id="userServiceImpl" class="com.connectm.fms.service.impl.UserServiceImpl" />
 	<bean id="organizationServiceImpl" class="com.connectm.fms.service.impl.OrganizationServiceImpl" />
+	<bean id="authUserServiceImpl" class="com.connectm.fms.service.impl.AuthUserServiceImpl" />
 	
 	<bean id="userDao" class="com.connectm.fms.dao.UserDAO">
 		<property name="template" ref="jdbcTemplate"></property>
@@ -53,6 +55,36 @@
 	
 	<bean id="organizationDAO" class="com.connectm.fms.dao.OrganizationDAO">
 		<property name="template" ref="jdbcTemplate"></property>
+	</bean>
+	
+	<bean id="authUserDAO" class="com.connectm.fms.dao.AuthUserDAO">
+		<property name="template" ref="jdbcTemplate"></property>
+	</bean>
+	
+	<!-- Email Dispatcher --> 
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="prudodo@gmail.com" />
+  		<property name="password" value="Mydesk@100" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+	</bean>
+
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="XXXXX" />
+		<property name="subject" value="Your Message" />
+	</bean>
+
+	<bean id="emailDispatcher" class="com.connectm.fms.messageservice.EmailDispatcher">
+		<property name="mailSender" ref="mailSender" />
+		<property name="templateMessage" ref="templateMessage" />
 	</bean>
 
 </beans> 

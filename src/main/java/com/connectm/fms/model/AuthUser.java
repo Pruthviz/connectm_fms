@@ -111,8 +111,65 @@ public class AuthUser{
 	 */
 	public void setInvalidAttempts(int invalidAttempts) {
 		this.invalidAttempts = invalidAttempts;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "AuthUser [authUserId=" + authUserId + ", userName=" + userName + ", password=" + password
+				+ ", passwordSetDate=" + passwordSetDate + ", invalidAttempts=" + invalidAttempts + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + authUserId;
+		result = prime * result + invalidAttempts;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((passwordSetDate == null) ? 0 : passwordSetDate.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AuthUser other = (AuthUser) obj;
+		if (authUserId != other.authUserId)
+			return false;
+		if (invalidAttempts != other.invalidAttempts)
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (passwordSetDate == null) {
+			if (other.passwordSetDate != null)
+				return false;
+		} else if (!passwordSetDate.equals(other.passwordSetDate))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
 	}	
-	
 	
 	
 }
